@@ -1,5 +1,7 @@
 import { auth } from "@clerk/nextjs/server"
 import { db } from "@/utils/utilities"
+import NotFound from "./not-found"
+import {notFound} from "next/navigation";
 
 export default async function SinglePost({params}){
 
@@ -13,6 +15,10 @@ export default async function SinglePost({params}){
         console.log(posts)
         const responseUsers = (await db.query(`SELECT * FROM users WHERE clerk_id = '${userId}'`)).rows
         console.log(responseUsers)
+
+        if (!posts) {
+           notFound()
+        }
     
 
     return (

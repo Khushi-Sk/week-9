@@ -22,14 +22,14 @@ export default function RootLayout({
             <Link className=" hover:bg-neutral-700 py-5 px-3 rounded-xl " href={"/"} >Home</Link>
             <Link className=" hover:bg-neutral-700 py-5 px-3 rounded-xl " href={"/about"} >About</Link>
             <Link className=" hover:bg-neutral-700 py-5 px-3 rounded-xl " href={"/posts"} >Posts</Link>
-            <Link className=" hover:bg-neutral-700 py-5 px-3 rounded-xl " href={"/user"}>User</Link>
+            <Link className=" hover:bg-neutral-700 py-5 px-3 rounded-xl " href={"/users"}>User</Link>
           </nav>
-          <SignedOut>
+          {/* <SignedOut>
             <SignInButton />
           </SignedOut>
           <SignedIn>
             <UserButton />
-          </SignedIn>
+          </SignedIn> */}
           {children}
         </body>
       </html>

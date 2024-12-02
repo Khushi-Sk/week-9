@@ -1,6 +1,11 @@
 import { db } from "@/utils/utilities";
 import { auth } from "@clerk/nextjs/server";
 import DialogDemo from "./editBio"
+import { SignedOut , SignedIn } from "@clerk/nextjs";
+import PostForm from "../../../components/postForm";
+import  UserForm from "../../../components/userForm";
+import Link from "next/link";
+
 
 export default async function UserPage() {
 
@@ -12,9 +17,15 @@ export default async function UserPage() {
   const users = response.rows
   const bio = users[0].bio
   const username_ = users[0].username
+
+  const responseUsers = await db.query(`SELECT * FROM users WHERE clerk_id = '${userId}'`)
+  const  numUsers = await responseUsers.rowCount;
     return (
       <div >
-        <h2>Edit User Details:</h2>
+
+            <SignedIn>{numUsers === 1 ? "yes-yes"
+                : 
+                 "no-no"} <h2>Edit User Details:</h2>
         <div className="py-10 ">
           <DialogDemo bio={bio} username={username_} userId={userId} />
          
@@ -36,11 +47,16 @@ export default async function UserPage() {
                   </button>
               </div>
             )
-            
           }
-
           )}
         </div>
+            </SignedIn>
+
+            <SignedOut>
+                <Link href={"/sign-in"} > Sign In </Link>
+            </SignedOut>
+
+       
       </div>
     );
   }

@@ -21,7 +21,7 @@ export default async function UserForm() {
       [username, bio, userId, profile]
     );
 
-    revalidatePath("/posts");
+    revalidatePath(`/users/[id]/page`);
   }
   return (
     <form action={handleSubmit}>
