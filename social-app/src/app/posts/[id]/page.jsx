@@ -16,7 +16,7 @@ export default async function SinglePost({params}){
         const responseUsers = (await db.query(`SELECT * FROM users WHERE clerk_id = '${userId}'`)).rows
         console.log(responseUsers)
 
-        if (!posts) {
+        if (!posts?.[0]) {
            notFound()
         }
     
